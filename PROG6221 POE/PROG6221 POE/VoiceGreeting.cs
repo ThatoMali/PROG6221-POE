@@ -16,12 +16,8 @@ namespace PROG6221_POE
             {
                 string filePath = "greeting.wav";
 
-                if (File.Exists(filePath))
-                {
-                    SoundPlayer player = new SoundPlayer(filePath);
-                    player.PlaySync();
-                }
-                else
+               
+               
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Voice greeting file not found.");

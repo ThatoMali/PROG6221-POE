@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "PROG6221 POE/1.0.0": {
+        "runtime": {
+          "PROG6221 POE.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PROG6221 POE/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

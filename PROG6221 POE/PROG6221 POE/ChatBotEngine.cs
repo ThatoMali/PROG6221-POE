@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PROG6221_POE
+
 using System;
 
-namespace CyberSecurityBot
+namespace PROG6221_POE
 {
     public static class ChatBotEngine
     {
