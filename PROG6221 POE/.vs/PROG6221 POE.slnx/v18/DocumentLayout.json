@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\chatbotengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\chatbotengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\botui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\botui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\chatbotengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\chatbotengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\voicegreeting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -42,12 +42,11 @@
               "RelativeToolTip": "PROG6221 POE\\Utils.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T11:45:06.95Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-28T11:45:06.95Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ChatBotEngine.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\ChatBotEngine.cs",
               "RelativeDocumentMoniker": "PROG6221 POE\\ChatBotEngine.cs",
@@ -55,8 +54,7 @@
               "RelativeToolTip": "PROG6221 POE\\ChatBotEngine.cs",
               "ViewState": "AgIAABkAAAAAtTIzMzPzvzYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T11:33:47.329Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-28T11:33:47.329Z"
             },
             {
               "$type": "Document",
@@ -68,18 +66,17 @@
               "RelativeToolTip": "PROG6221 POE\\VoiceGreeting.cs",
               "ViewState": "AgIAAAUAAAAgmZmZmZkBwBMAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T11:27:37.457Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-28T11:27:37.457Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "BotUI.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\BotUI.cs",
               "RelativeDocumentMoniker": "PROG6221 POE\\BotUI.cs",
               "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\BotUI.cs",
               "RelativeToolTip": "PROG6221 POE\\BotUI.cs",
-              "ViewState": "AgIAAAUAAACAZmZmZsY2wAMAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAmpmZmRkXwBoAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-28T11:25:26.587Z",
               "EditorCaption": ""
@@ -94,8 +91,7 @@
               "RelativeToolTip": "PROG6221 POE\\Program.cs",
               "ViewState": "AgIAAAYAAADQMjMzMzMiwAcAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T11:05:21.805Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-28T11:05:21.805Z"
             }
           ]
         }
