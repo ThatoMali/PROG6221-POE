@@ -31,6 +31,7 @@ namespace PROG6221_POE
         {
             TypeEffect("\nWelcome to the Cybersecurity Awareness Bot!");
             TypeEffect("I'm here to help you stay safe online.\n");
+            TypeEffect("Type 'exit', 'quit', or 'bye' anytime to end the session.\n");
         }
 
         public static void TypeEffect(string message)

@@ -1,13 +1,13 @@
-﻿
+﻿using PROG6221_POE;
 using System;
-namespace PROG6221_POE
 
+namespace PROG6221_POE
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.Title = "Cybersecurity Awareness Bot";
+            Console.Title = "SecureCore Cybersecurity Bot";
 
             BotUI.ShowHeader();
 
@@ -17,9 +17,11 @@ namespace PROG6221_POE
 
             ChatBotEngine.StartChat();
 
-            Console.WriteLine("\nThank you for using the Cybersecurity Awareness Bot. Stay safe online!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nSession ended. Stay safe online.");
+            Console.ResetColor();
+
             Console.ReadKey();
         }
     }
 }
-

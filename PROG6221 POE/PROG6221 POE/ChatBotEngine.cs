@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-
+﻿using PROG6221_POE;
 using System;
 
 namespace PROG6221_POE
@@ -12,7 +8,7 @@ namespace PROG6221_POE
         public static void StartChat()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("\nPlease enter your name: ");
+            Console.Write("\nEnter your name: ");
             Console.ResetColor();
 
             string name = Console.ReadLine();
@@ -24,7 +20,7 @@ namespace PROG6221_POE
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\nWelcome {name}! How can I help you today?\n");
+            Console.WriteLine($"\nHello {name}, how can I assist you today?\n");
             Console.ResetColor();
 
             while (true)
@@ -35,14 +31,19 @@ namespace PROG6221_POE
 
                 string input = Console.ReadLine()?.ToLower();
 
+                // INPUT VALIDATION
                 if (string.IsNullOrWhiteSpace(input))
                 {
-                    Console.WriteLine("I didn’t quite understand that. Could you rephrase?");
+                    BotUI.TypeEffect("I didn’t quite understand that. Could you rephrase?");
                     continue;
                 }
 
-                if (input.Contains("exit") || input.Contains("quit"))
+                // QUIT FUNCTION
+                if (input == "exit" || input == "quit" || input == "bye")
+                {
+                    BotUI.TypeEffect("Goodbye! Stay safe online.");
                     break;
+                }
 
                 Respond(input);
             }
@@ -51,26 +52,25 @@ namespace PROG6221_POE
         private static void Respond(string input)
         {
             if (input.Contains("how are you"))
-                BotUI.TypeEffect("I'm doing great! Ready to help you stay safe online.");
+                BotUI.TypeEffect("I'm functioning optimally and ready to assist you.");
 
             else if (input.Contains("purpose"))
-                BotUI.TypeEffect("My purpose is to educate users about cybersecurity awareness.");
+                BotUI.TypeEffect("My purpose is to promote cybersecurity awareness and safe online practices.");
 
             else if (input.Contains("ask"))
-                BotUI.TypeEffect("You can ask me about passwords, phishing, and safe browsing.");
+                BotUI.TypeEffect("You can ask me about passwords, phishing, or safe browsing.");
 
             else if (input.Contains("password"))
-                BotUI.TypeEffect("Use strong passwords with uppercase, lowercase, numbers, and symbols.");
+                BotUI.TypeEffect("Use strong passwords with a mix of letters, numbers, and symbols.");
 
             else if (input.Contains("phishing"))
-                BotUI.TypeEffect("Never click suspicious links or download unknown attachments.");
+                BotUI.TypeEffect("Be cautious of suspicious emails and never click unknown links.");
 
             else if (input.Contains("browsing"))
-                BotUI.TypeEffect("Always verify websites and avoid entering sensitive information on untrusted sites.");
+                BotUI.TypeEffect("Always ensure websites are secure (https) before entering sensitive data.");
 
             else
                 BotUI.TypeEffect("I didn’t quite understand that. Could you rephrase?");
         }
     }
 }
-

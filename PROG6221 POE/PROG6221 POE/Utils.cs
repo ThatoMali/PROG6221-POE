@@ -1,10 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading;
 
-namespace PROG6221_POE
+namespace CyberSecurityBot
 {
-    internal class Utils
+    public static class Utils
     {
+        public static void Delay(int ms)
+        {
+            Thread.Sleep(ms);
+        }
+
+        public static void Divider()
+        {
+            Console.WriteLine("==============================================");
+        }
     }
 }
