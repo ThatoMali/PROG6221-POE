@@ -1,9 +1,11 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Media;
 
-
-namespace CyberSecurityBot
+namespace ST10447949_POE_Part1
 {
     public static class VoiceGreeting
     {
@@ -11,22 +13,15 @@ namespace CyberSecurityBot
         {
             try
             {
-                string filePath = "greeting.wav";
-                if (File.Exists(filePath))
-                {
-                    SoundPlayer player = new SoundPlayer(filePath);
-                    player.PlaySync();
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Voice greeting file not found.");
-                    Console.ResetColor();
-                }
+
+                SoundPlayer player = new SoundPlayer("C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\greeting.wav"); player.Play(); // Waits until complete
+
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine("Audio Error: " + ex.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("⚠️ Voice greeting not found.");
+                Console.ResetColor();
             }
         }
     }
