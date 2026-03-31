@@ -2,6 +2,7 @@
 using System.IO;
 using System.Media;
 
+
 namespace CyberSecurityBot
 {
     public static class VoiceGreeting
@@ -11,7 +12,6 @@ namespace CyberSecurityBot
             try
             {
                 string filePath = "greeting.wav";
-
                 if (File.Exists(filePath))
                 {
                     SoundPlayer player = new SoundPlayer(filePath);
