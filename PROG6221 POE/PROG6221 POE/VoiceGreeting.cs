@@ -1,28 +1,74 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Media;
+using System.Speech.Synthesis;
+using System.Threading.Tasks;
 
-namespace ST10447949_POE_Part1
+namespace PROG6221_POE
 {
-    public static class VoiceGreeting
+    public class VoiceService : IDisposable
     {
-        public static void PlayGreeting()
+        private SpeechSynthesizer _synthesizer;
+        private SoundPlayer _soundPlayer;
+
+        public VoiceService()
         {
             try
             {
-
-                SoundPlayer player = new SoundPlayer("C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\greeting.wav"); player.Play(); // Waits until complete
-
+                _synthesizer = new SpeechSynthesizer();
+                _synthesizer.SetOutputToDefaultAudioDevice();
+                _synthesizer.Rate = 1; // Slightly faster
+                _synthesizer.Volume = 80;
             }
-            catch
+            catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("⚠️ Voice greeting not found.");
-                Console.ResetColor();
+                System.Diagnostics.Debug.WriteLine($"Speech synthesis not available: {ex.Message}");
             }
+        }
+
+        public void PlayGreeting()
+        {
+            try
+            {
+                // Question 1: Try to play WAV file if exists
+                string wavPath = System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "greeting.wav");
+
+                if (System.IO.File.Exists(wavPath))
+                {
+                    _soundPlayer = new SoundPlayer(wavPath);
+                    _soundPlayer.Play();
+                }
+                else
+                {
+                    // Fallback to text-to-speech
+                    SpeakResponse("Welcome to SecureCore, your cybersecurity awareness chatbot!");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Voice greeting failed: {ex.Message}");
+            }
+        }
+
+        public async void SpeakResponse(string text)
+        {
+            if (_synthesizer == null) return;
+
+            try
+            {
+                await Task.Run(() => _synthesizer.SpeakAsync(text));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Speech failed: {ex.Message}");
+            }
+        }
+
+        public void Dispose()
+        {
+            _synthesizer?.Dispose();
+            _soundPlayer?.Dispose();
         }
     }
 }
