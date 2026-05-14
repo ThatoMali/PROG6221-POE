@@ -1,26 +1,30 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
-    "net10.0-windows7.0": {
-      "System.Speech/8.0.0": {
+    "net10.0-windows": {
+      "System.Speech/10.0.8": {
         "type": "package",
         "compile": {
-          "lib/net8.0/System.Speech.dll": {}
+          "lib/net10.0/System.Speech.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net8.0/System.Speech.dll": {}
+          "lib/net10.0/System.Speech.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
-          "buildTransitive/net6.0/_._": {}
+          "buildTransitive/net8.0/_._": {}
         },
         "runtimeTargets": {
-          "runtimes/win/lib/net8.0/System.Speech.dll": {
+          "runtimes/win/lib/net10.0/System.Speech.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
         }
       },
-      "System.Windows.Extensions/10.0.5": {
+      "System.Windows.Extensions/10.0.8": {
         "type": "package",
         "compile": {
           "lib/net10.0/_._": {
@@ -42,36 +46,42 @@
     }
   },
   "libraries": {
-    "System.Speech/8.0.0": {
-      "sha512": "CNuiA6vb95Oe5PRjClZEBiaju31vwB8OIeCgeSBXyZL6+MS4RVVB2X/C11z0xCkooHE3Vy91nM2z76emIzR+sg==",
+    "System.Speech/10.0.8": {
+      "sha512": "uxrdoUKw+S1eBo0foyv3pQ13NKV4LhsgaD5FV1zya1JHoi+QveWXt6I5nrLhA4GeheRr+cjLfDy0hx7UXUyHnw==",
       "type": "package",
-      "path": "system.speech/8.0.0",
+      "path": "system.speech/10.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "LICENSE.TXT",
         "PACKAGE.md",
         "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net6.0/_._",
+        "buildTransitive/net8.0/_._",
         "buildTransitive/netcoreapp2.0/System.Speech.targets",
+        "lib/net10.0/System.Speech.dll",
+        "lib/net10.0/System.Speech.xml",
         "lib/net462/_._",
-        "lib/net6.0/System.Speech.dll",
-        "lib/net7.0/System.Speech.dll",
         "lib/net8.0/System.Speech.dll",
+        "lib/net8.0/System.Speech.xml",
+        "lib/net9.0/System.Speech.dll",
+        "lib/net9.0/System.Speech.xml",
         "lib/netstandard2.0/System.Speech.dll",
-        "runtimes/win/lib/net6.0/System.Speech.dll",
-        "runtimes/win/lib/net7.0/System.Speech.dll",
+        "lib/netstandard2.0/System.Speech.xml",
+        "runtimes/win/lib/net10.0/System.Speech.dll",
+        "runtimes/win/lib/net10.0/System.Speech.xml",
         "runtimes/win/lib/net8.0/System.Speech.dll",
-        "system.speech.8.0.0.nupkg.sha512",
+        "runtimes/win/lib/net8.0/System.Speech.xml",
+        "runtimes/win/lib/net9.0/System.Speech.dll",
+        "runtimes/win/lib/net9.0/System.Speech.xml",
+        "system.speech.10.0.8.nupkg.sha512",
         "system.speech.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Windows.Extensions/10.0.5": {
-      "sha512": "5hVP2TIgEqqA590MnKmMN5+Fgzl6xBRjR1wbgC3M1znrZZJe63TwBPN+ymaMgwT0vjsiXk95AjMAe8SAhhJSTg==",
+    "System.Windows.Extensions/10.0.8": {
+      "sha512": "4hnHSbtc1FP91qiOsweSa/3My/tkKAU9WcUyCZNSUPhfNyFtIhTl9qEPaSK2g4XzTMaq4huRerF6tSV9q44Cnw==",
       "type": "package",
-      "path": "system.windows.extensions/10.0.5",
+      "path": "system.windows.extensions/10.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -90,16 +100,16 @@
         "runtimes/win/lib/net8.0/System.Windows.Extensions.xml",
         "runtimes/win/lib/net9.0/System.Windows.Extensions.dll",
         "runtimes/win/lib/net9.0/System.Windows.Extensions.xml",
-        "system.windows.extensions.10.0.5.nupkg.sha512",
+        "system.windows.extensions.10.0.8.nupkg.sha512",
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     }
   },
   "projectFileDependencyGroups": {
-    "net10.0-windows7.0": [
-      "System.Speech >= 8.0.0",
-      "System.Windows.Extensions >= 10.0.5"
+    "net10.0-windows": [
+      "System.Speech >= 10.0.8",
+      "System.Windows.Extensions >= 10.0.8"
     ]
   },
   "packageFolders": {
@@ -131,7 +141,7 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net10.0-windows7.0": {
+        "net10.0-windows": {
           "framework": "net10.0-windows7.0",
           "targetAlias": "net10.0-windows",
           "projectReferences": {}
@@ -147,20 +157,20 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
-      "net10.0-windows7.0": {
+      "net10.0-windows": {
         "framework": "net10.0-windows7.0",
         "targetAlias": "net10.0-windows",
         "dependencies": {
           "System.Speech": {
             "target": "Package",
-            "version": "[8.0.0, )"
+            "version": "[10.0.8, )"
           },
           "System.Windows.Extensions": {
             "target": "Package",
-            "version": "[10.0.5, )"
+            "version": "[10.0.8, )"
           }
         },
         "imports": [
@@ -182,7 +192,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

@@ -1,0 +1,25 @@
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\bin\Debug\net10.0-windows\greeting.wav
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\bin\Debug\net10.0-windows\PROG6221 POE.exe
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\bin\Debug\net10.0-windows\PROG6221 POE.deps.json
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\bin\Debug\net10.0-windows\PROG6221 POE.runtimeconfig.json
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\bin\Debug\net10.0-windows\PROG6221 POE.dll
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\bin\Debug\net10.0-windows\PROG6221 POE.pdb
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\bin\Debug\net10.0-windows\System.Speech.dll
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\bin\Debug\net10.0-windows\runtimes\win\lib\net10.0\System.Speech.dll
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.csproj.AssemblyReference.cache
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\MainWindow.baml
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\MainWindow.g.cs
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\App.g.cs
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE_MarkupCompile.cache
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.g.resources
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.AssemblyInfoInputs.cache
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.AssemblyInfo.cs
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.csproj.CoreCompileInputs.cache
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.sourcelink.json
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221.1969FE56.Up2Date
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.dll
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\refint\PROG6221 POE.dll
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.pdb
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\PROG6221 POE.genruntimeconfig.cache
+C:\Users\lab_services_student\Desktop\PROG6221-POE\PROG6221 POE\PROG6221 POE\obj\Debug\net10.0-windows\ref\PROG6221 POE.dll

@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "qaAVZVa7+iI=",
+  "dgSpecHash": "gO/Z40fe/zg=",
   "success": true,
   "projectFilePath": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\PROG6221 POE.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\lab_services_student\\.nuget\\packages\\system.speech\\8.0.0\\system.speech.8.0.0.nupkg.sha512",
-    "C:\\Users\\lab_services_student\\.nuget\\packages\\system.windows.extensions\\10.0.5\\system.windows.extensions.10.0.5.nupkg.sha512"
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\system.speech\\10.0.8\\system.speech.10.0.8.nupkg.sha512",
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\system.windows.extensions\\10.0.8\\system.windows.extensions.10.0.8.nupkg.sha512"
   ],
   "logs": [
     {
