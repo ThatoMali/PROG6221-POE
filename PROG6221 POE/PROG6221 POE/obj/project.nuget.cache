@@ -1,11 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "gO/Z40fe/zg=",
+  "dgSpecHash": "z5Dl/YqcoiM=",
   "success": true,
   "projectFilePath": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\PROG6221 POE.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\google.protobuf\\3.32.0\\google.protobuf.3.32.0.nupkg.sha512",
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\k4os.compression.lz4\\1.3.8\\k4os.compression.lz4.1.3.8.nupkg.sha512",
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.8\\k4os.compression.lz4.streams.1.3.8.nupkg.sha512",
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\k4os.hash.xxhash\\1.0.8\\k4os.hash.xxhash.1.0.8.nupkg.sha512",
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\mysql.data\\9.7.0\\mysql.data.9.7.0.nupkg.sha512",
     "C:\\Users\\lab_services_student\\.nuget\\packages\\system.speech\\10.0.8\\system.speech.10.0.8.nupkg.sha512",
-    "C:\\Users\\lab_services_student\\.nuget\\packages\\system.windows.extensions\\10.0.8\\system.windows.extensions.10.0.8.nupkg.sha512"
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\system.windows.extensions\\10.0.8\\system.windows.extensions.10.0.8.nupkg.sha512",
+    "C:\\Users\\lab_services_student\\.nuget\\packages\\zstdsharp.port\\0.8.6\\zstdsharp.port.0.8.6.nupkg.sha512"
   ],
   "logs": [
     {

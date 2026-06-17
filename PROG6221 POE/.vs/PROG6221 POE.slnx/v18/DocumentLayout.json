@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\chatbotengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\chatbotengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\voiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\voiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\activitylogmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\activitylogmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\chatbotengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\chatbotengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\quizmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\quizmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\voiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|solutionrelative:prog6221 poe\\voiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{97A910DE-5176-E8DE-82C1-7B3B8D5371DD}|PROG6221 POE\\PROG6221 POE.csproj|c:\\users\\lab_services_student\\desktop\\prog6221-poe\\prog6221 poe\\prog6221 poe\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -42,11 +54,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DatabaseHelper.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\DatabaseHelper.cs",
+              "RelativeDocumentMoniker": "PROG6221 POE\\DatabaseHelper.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\DatabaseHelper.cs",
+              "RelativeToolTip": "PROG6221 POE\\DatabaseHelper.cs",
+              "ViewState": "AgIAAAAAAAAAcGZmZmYEwA8AAAADAQAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T13:02:06.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ActivityLogManager.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\ActivityLogManager.cs",
+              "RelativeDocumentMoniker": "PROG6221 POE\\ActivityLogManager.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\ActivityLogManager.cs",
+              "RelativeToolTip": "PROG6221 POE\\ActivityLogManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T13:03:26.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "PROG6221 POE\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\MainWindow.xaml.cs",
+              "RelativeToolTip": "PROG6221 POE\\MainWindow.xaml.cs",
+              "ViewState": "AgIAANcAAAAAAAAAAAAowPsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T17:02:39.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ChatBotEngine.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\ChatBotEngine.cs",
+              "RelativeDocumentMoniker": "PROG6221 POE\\ChatBotEngine.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\ChatBotEngine.cs",
+              "RelativeToolTip": "PROG6221 POE\\ChatBotEngine.cs",
+              "ViewState": "AgIAANsCAAAAAAAAAAAowP8CAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-28T11:33:47.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "QuizManager.cs",
+              "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\QuizManager.cs",
+              "RelativeDocumentMoniker": "PROG6221 POE\\QuizManager.cs",
+              "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\QuizManager.cs",
+              "RelativeToolTip": "PROG6221 POE\\QuizManager.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAowLsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T13:02:52.081Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -54,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "VoiceService.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\VoiceService.cs",
               "RelativeDocumentMoniker": "PROG6221 POE\\VoiceService.cs",
@@ -67,43 +144,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ChatBotEngine.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\ChatBotEngine.cs",
-              "RelativeDocumentMoniker": "PROG6221 POE\\ChatBotEngine.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\ChatBotEngine.cs",
-              "RelativeToolTip": "PROG6221 POE\\ChatBotEngine.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAL0BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T11:33:47.329Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "PROG6221 POE\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\MainWindow.xaml.cs",
-              "RelativeToolTip": "PROG6221 POE\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAQwKoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-14T17:02:39.368Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\MainWindow.xaml",
               "RelativeDocumentMoniker": "PROG6221 POE\\MainWindow.xaml",
               "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\MainWindow.xaml",
               "RelativeToolTip": "PROG6221 POE\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-05-14T17:02:08.321Z"
+              "WhenOpened": "2026-05-14T17:02:08.321Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\App.xaml.cs",
               "RelativeDocumentMoniker": "PROG6221 POE\\App.xaml.cs",
@@ -111,22 +164,24 @@
               "RelativeToolTip": "PROG6221 POE\\App.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-14T17:08:51.327Z"
+              "WhenOpened": "2026-05-14T17:08:51.327Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "App.xaml",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\App.xaml",
               "RelativeDocumentMoniker": "PROG6221 POE\\App.xaml",
               "ToolTip": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\App.xaml",
               "RelativeToolTip": "PROG6221 POE\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-05-14T17:08:33.948Z"
+              "WhenOpened": "2026-05-14T17:08:33.948Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "BotUI.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\BotUI.cs",
               "RelativeDocumentMoniker": "PROG6221 POE\\BotUI.cs",
@@ -134,11 +189,12 @@
               "RelativeToolTip": "PROG6221 POE\\BotUI.cs",
               "ViewState": "AgIAAAkAAAAAMzMzMzMbwCEAAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T11:25:26.587Z"
+              "WhenOpened": "2026-02-28T11:25:26.587Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "Utils.cs",
               "DocumentMoniker": "C:\\Users\\lab_services_student\\Desktop\\PROG6221-POE\\PROG6221 POE\\PROG6221 POE\\Utils.cs",
               "RelativeDocumentMoniker": "PROG6221 POE\\Utils.cs",
@@ -146,7 +202,8 @@
               "RelativeToolTip": "PROG6221 POE\\Utils.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-28T11:45:06.95Z"
+              "WhenOpened": "2026-02-28T11:45:06.95Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -31,6 +31,8 @@ namespace PROG6221_POE
         private ChatbotEngine _chatbot;
         private VoiceService _voiceService;
         private ObservableCollection<ChatMessage> _messages;
+        private bool _awaitingTaskDescription = false;
+        private bool _awaitingReminderConfirmation = false;
 
         public MainWindow()
         {
@@ -56,7 +58,12 @@ namespace PROG6221_POE
             {
                 txtSentiment.Text = $"{emoji} Sentiment: {sentiment}";
                 txtSentiment.Foreground = sentiment.Contains("Positive") ? Brushes.LightGreen :
-                                          sentiment.Contains("Negative") ? Brushes.Salmon : Brushes.LightGray;
+                                          sentiment.Contains("worried") ? Brushes.LightYellow :
+                                          sentiment.Contains("frustrated") ? Brushes.Salmon :
+                                          sentiment.Contains("confused") ? Brushes.Orange :
+                                          sentiment.Contains("grateful") ? Brushes.LightGreen :
+                                          sentiment.Contains("hopeless") ? Brushes.Red :
+                                          Brushes.LightGray;
             });
         }
 
@@ -65,8 +72,22 @@ namespace PROG6221_POE
             Dispatcher.Invoke(() =>
             {
                 AddBotMessage(response);
-                if (_chatbot.LastTopic != null) _voiceService?.SpeakResponse(response);
                 ScrollToBottom();
+
+                // Check if response indicates we're waiting for user input
+                if (response.Contains("description") || response.Contains("skip"))
+                {
+                    _awaitingTaskDescription = true;
+                }
+                else if (response.Contains("reminder") && response.Contains("yes/no"))
+                {
+                    _awaitingReminderConfirmation = true;
+                }
+                else
+                {
+                    _awaitingTaskDescription = false;
+                    _awaitingReminderConfirmation = false;
+                }
             });
         }
 
@@ -115,6 +136,7 @@ namespace PROG6221_POE
             _messages.Clear();
             AddBotMessage($"Hello {userName}! Welcome to SecureCore.");
             AddBotMessage("I can help with: Password Safety, Phishing Attacks, Safe Browsing, Malware Protection");
+            AddBotMessage("🆕 **New Features:** Task Management, Cybersecurity Quiz, Activity Log");
             AddBotMessage("Type 'menu' for options or 'exit' to quit.");
 
             txtMessageInput.IsEnabled = true;
@@ -141,6 +163,46 @@ namespace PROG6221_POE
             AddUserMessage(userInput);
             txtMessageInput.Clear();
 
+            // Handle special task flows
+            if (_awaitingTaskDescription)
+            {
+                _chatbot.AddTaskWithDescription(userInput);
+                _awaitingTaskDescription = false;
+                ScrollToBottom();
+                return;
+            }
+
+            if (_awaitingReminderConfirmation)
+            {
+                if (userInput.ToLower().Contains("yes") || userInput.ToLower().Contains("y"))
+                {
+                    AddBotMessage("📅 Please specify the reminder date (e.g., '2026-06-20' or 'in 3 days' or 'tomorrow')");
+                    _awaitingReminderConfirmation = false;
+                    ScrollToBottom();
+                    return;
+                }
+                else
+                {
+                    _chatbot.SetTaskReminder(DateTime.MinValue); // This will add task without reminder
+                    _awaitingReminderConfirmation = false;
+                    ScrollToBottom();
+                    return;
+                }
+            }
+
+            // Check if we're in a date/reminder flow
+            if (userInput.Contains("in ") || userInput.Contains("days") || userInput.Contains("tomorrow") ||
+                userInput.Contains("today") || DateTime.TryParse(userInput, out _))
+            {
+                DateTime reminderDate = ParseReminderDate(userInput);
+                if (reminderDate != DateTime.MinValue)
+                {
+                    _chatbot.SetTaskReminder(reminderDate);
+                    ScrollToBottom();
+                    return;
+                }
+            }
+
             try
             {
                 await Task.Run(() => _chatbot.ProcessInput(userInput));
@@ -150,10 +212,29 @@ namespace PROG6221_POE
                 AddBotMessage("I encountered an issue. Please try again.");
             }
 
-            if (_chatbot.IsAwaitingFollowUp)
-                AddBotMessage("Would you like me to explain more? Say 'tell me more'!");
-
             ScrollToBottom();
+        }
+
+        private DateTime ParseReminderDate(string input)
+        {
+            input = input.ToLower().Trim();
+
+            if (input == "today")
+                return DateTime.Now.Date;
+
+            if (input == "tomorrow")
+                return DateTime.Now.Date.AddDays(1);
+
+            // Parse "in X days"
+            var match = System.Text.RegularExpressions.Regex.Match(input, @"in (\d+) days?");
+            if (match.Success && int.TryParse(match.Groups[1].Value, out int days))
+                return DateTime.Now.AddDays(days);
+
+            // Try direct parse
+            if (DateTime.TryParse(input, out DateTime result))
+                return result;
+
+            return DateTime.MinValue;
         }
 
         private void BtnVoice_Click(object sender, RoutedEventArgs e)

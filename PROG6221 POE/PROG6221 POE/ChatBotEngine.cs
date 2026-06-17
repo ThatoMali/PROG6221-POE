@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PROG6221_POE
 {
@@ -10,164 +11,175 @@ namespace PROG6221_POE
         public event Action<string, string> OnSentimentDetected;
         public event Action<string> OnUserInfoUpdated;
 
-        #region Question 2: Keyword Recognition
-        private Dictionary<string, List<string>> _keywordMap = new Dictionary<string, List<string>>
-        {
-            { "password", new List<string> { "password", "pass", "login", "credentials", "account" } },
-            { "phishing", new List<string> { "phish", "scam", "fraud", "fake email", "spoof" } },
-            { "privacy", new List<string> { "privacy", "personal data", "data protection", "gdpr" } },
-            { "browsing", new List<string> { "browse", "browser", "website", "http", "https", "url" } },
-            { "malware", new List<string> { "malware", "virus", "ransomware", "trojan", "spyware" } }
-        };
-        #endregion
+        private DatabaseHelper _dbHelper;
+        private QuizManager _quizManager;
+        private ActivityLogManager _activityLog;
+        private Dictionary<int, string> _activeReminders;
 
-        #region Question 3: Random Responses
-        private Dictionary<string, List<string>> _responsePool = new Dictionary<string, List<string>>
-        {
-            { "password", new List<string> {
-                "🔐 Use a password manager to generate and store unique passwords for each account!",
-                "🛡️ Enable two-factor authentication whenever possible - it adds an extra layer of security!",
-                "💪 Create passwords with at least 12 characters using uppercase, lowercase, numbers, and symbols!",
-                "🚫 Never reuse passwords across different accounts!",
-                "🎯 Avoid using personal information like birthdays or pet names in your passwords!"
-            }},
-            { "phishing", new List<string> {
-                "🎣 Always check the sender's email address carefully - scammers use slight variations!",
-                "⚠️ Hover over links before clicking to see the actual destination URL!",
-                "📧 Legitimate companies never ask for passwords via email!",
-                "🔍 Look for spelling errors and urgent language - common phishing tactics!",
-                "📱 When in doubt, contact the company directly using their official website!"
-            }},
-            { "privacy", new List<string> {
-                "🔒 Review app permissions regularly - remove access for apps you don't use!",
-                "🌐 Use a VPN when on public Wi-Fi to encrypt your internet traffic!",
-                "📱 Disable location tracking for apps that don't need it!",
-                "🔍 Regularly check 'Have I Been Pwned' to see if your data was compromised!",
-                "📧 Use aliases or temporary emails for newsletter signups!"
-            }},
-            { "browsing", new List<string> {
-                "🌐 Look for the padlock icon in the address bar - it means the site uses HTTPS encryption!",
-                "🧹 Clear your browser cache and cookies regularly!",
-                "🔧 Keep your browser updated for the latest security patches!",
-                "🚫 Avoid saving passwords in your browser - use a password manager instead!",
-                "🛡️ Install reputable ad-blockers and script blockers!"
-            }},
-            { "malware", new List<string> {
-                "💿 Always download software from official sources, not third-party sites!",
-                "🔄 Keep your antivirus software updated and run regular scans!",
-                "⚠️ Be cautious with email attachments - even from known senders!",
-                "🔧 Enable automatic updates for your operating system!",
-                "💾 Back up important data regularly to an external drive or cloud!"
-            }}
-        };
+        // Existing keyword maps and response pools
+        private Dictionary<string, List<string>> _keywordMap;
+        private Dictionary<string, List<string>> _responsePool;
+        private List<string> _generalTips;
+        private Dictionary<string, string[]> _sentimentKeywords;
+        private Dictionary<string, List<string>> _empatheticResponses;
 
-        private List<string> _generalTips = new List<string>
-        {
-            "💡 Keep your software updated - security patches fix known vulnerabilities!",
-            "💡 Use unique passwords for every account - credential stuffing attacks are common!",
-            "💡 Think before you click - social engineering is the #1 attack vector!",
-            "💡 Regular backups can save you from ransomware attacks!",
-            "💡 Be skeptical of unsolicited calls asking for personal information!",
-            "💡 Lock your computer when stepping away - even for a minute!",
-            "💡 Use secure Wi-Fi - public networks can be easily intercepted!",
-            "💡 Monitor your bank statements for unauthorized transactions!"
-        };
-        #endregion
-
-        #region Question 5: Memory and Recall
         private string _userName;
         private string _favoriteTopic;
         private int _messageCount = 0;
-        #endregion
-
-        #region Question 4: Conversation Flow
         private bool _awaitingFollowUp = false;
         private string _currentTopic = null;
+        private bool _quizMode = false;
+        private string _pendingTaskTitle = null;
 
         public bool IsAwaitingFollowUp => _awaitingFollowUp;
         public string LastTopic => _currentTopic;
-        #endregion
-
-        #region Question 6: Enhanced Sentiment Detection
-        // Sentiment categories with detailed keywords
-        private Dictionary<string, string[]> _sentimentKeywords = new Dictionary<string, string[]>
-        {
-            { "worried", new string[] {
-                "worried", "concerned", "anxious", "nervous", "scared", "fear",
-                "unsafe", "vulnerable", "exposed", "at risk", "panic", "terrified"
-            }},
-            { "frustrated", new string[] {
-                "frustrated", "annoyed", "irritated", "fed up", "tired of",
-                "sick of", "exhausted", "overwhelmed", "stressed"
-            }},
-            { "curious", new string[] {
-                "curious", "interested", "want to learn", "tell me", "explain",
-                "how does", "what is", "why do", "I wonder"
-            }},
-            { "confused", new string[] {
-                "confused", "don't understand", "unclear", "what does it mean",
-                "too complicated", "complex", "hard to follow"
-            }},
-            { "grateful", new string[] {
-                "thank", "thanks", "appreciate", "helpful", "useful", "great info",
-                "good to know", "awesome", "amazing", "love this"
-            }},
-            { "hopeless", new string[] {
-                "hopeless", "no hope", "useless", "pointless", "why bother",
-                "won't help", "never work", "impossible"
-            }}
-        };
-
-        // Empathetic responses based on sentiment
-        private Dictionary<string, List<string>> _empatheticResponses = new Dictionary<string, List<string>>
-        {
-            { "worried", new List<string> {
-                "I completely understand your concern. Many people feel worried about cybersecurity - it's normal! Let me help you feel more secure.",
-                "Your worry is valid. Online threats can be scary, but I'm here to help you stay safe. Here's something practical you can do:",
-                "It's okay to feel worried. The good news is that there are simple steps you can take to protect yourself. Let me share one:",
-                "Feeling concerned is the first step toward better security! Let me give you a tip that will help ease your mind."
-            }},
-            { "frustrated", new List<string> {
-                "I hear your frustration! Cybersecurity can feel overwhelming at times. Let me simplify this for you:",
-                "It's completely normal to feel frustrated. Let me break this down into something simple you can do right now:",
-                "I understand this can be frustrating. Instead of trying to do everything, let's focus on one small, important step:",
-                "Your frustration is understandable. Let me give you one simple tip that makes a big difference:"
-            }},
-            { "curious", new List<string> {
-                "That's a great question! I'm glad you're curious about staying safe online. Here's what you should know:",
-                "I love your curiosity! Learning about cybersecurity is the best way to stay protected. Let me explain:",
-                "Great question! Being curious about security is how we all stay safer. Here's the answer:",
-                "I'm happy you asked! Curiosity about cybersecurity is the first step to becoming more secure."
-            }},
-            { "confused", new List<string> {
-                "I can see this is confusing. Let me explain it more simply:",
-                "Don't worry - cybersecurity terms can be confusing. Let me put this in plain English:",
-                "I understand this is complex. Let me break it down into simple steps:",
-                "You're not alone in finding this confusing. Let me explain it differently:"
-            }},
-            { "grateful", new List<string> {
-                "You're very welcome! I'm glad I could help. Staying safe online is important. Here's another tip you might like:",
-                "Thank you! I'm happy to help. Since you found that useful, here's something else to keep in mind:",
-                "My pleasure! Knowledge is power when it comes to security. Let me share another helpful tip:",
-                "I appreciate your kind words! Here's another cybersecurity tip you might find valuable:"
-            }},
-            { "hopeless", new List<string> {
-                "I hear that you're feeling hopeless. Please don't give up - even small steps make a big difference! Let's start with something simple:",
-                "I understand it can feel hopeless when there's so much to worry about. But you don't have to do everything at once. Try this one thing:",
-                "Don't lose hope! Every security expert started somewhere. Let's focus on one small, manageable step:",
-                "I know cybersecurity can feel overwhelming, but you're already taking the right step by learning. Here's an easy win for you:"
-            }}
-        };
-        #endregion
+        public bool IsQuizMode => _quizMode;
 
         public ChatbotEngine()
         {
+            InitializeDictionaries();
+            _dbHelper = new DatabaseHelper();
+            _quizManager = new QuizManager();
+            _activityLog = new ActivityLogManager();
+
+            // Subscribe to quiz events
+            _quizManager.OnQuestionDisplayed += (q) => OnResponseGenerated?.Invoke(q);
+            _quizManager.OnAnswerFeedback += (correct, explanation) =>
+            {
+                string feedback = correct ? "✅ Correct! " : "❌ Incorrect. ";
+                OnResponseGenerated?.Invoke(feedback + explanation);
+                _activityLog.AddEntry("Quiz Answer", $"{(correct ? "Correct" : "Incorrect")}: {explanation.Substring(0, Math.Min(50, explanation.Length))}...");
+            };
+            _quizManager.OnQuizComplete += (score, feedback) =>
+            {
+                OnResponseGenerated?.Invoke($"🎯 **Quiz Complete!**\nScore: {score}/{_quizManager.TotalQuestions}\n{feedback}");
+                _activityLog.AddEntry("Quiz Complete", $"Score: {score}/{_quizManager.TotalQuestions}");
+                _quizMode = false;
+            };
+        }
+
+        private void InitializeDictionaries()
+        {
+            _keywordMap = new Dictionary<string, List<string>>
+            {
+                { "password", new List<string> { "password", "pass", "login", "credentials", "account" } },
+                { "phishing", new List<string> { "phish", "scam", "fraud", "fake email", "spoof" } },
+                { "privacy", new List<string> { "privacy", "personal data", "data protection", "gdpr" } },
+                { "browsing", new List<string> { "browse", "browser", "website", "http", "https", "url" } },
+                { "malware", new List<string> { "malware", "virus", "ransomware", "trojan", "spyware" } },
+                { "task", new List<string> { "task", "todo", "to-do", "add task", "new task" } },
+                { "reminder", new List<string> { "remind", "reminder", "remember" } },
+                { "quiz", new List<string> { "quiz", "game", "test", "challenge", "knowledge" } },
+                { "log", new List<string> { "log", "history", "activity", "what have you done" } }
+            };
+
+            _responsePool = new Dictionary<string, List<string>>
+            {
+                { "password", new List<string> {
+                    "🔐 Use a password manager to generate and store unique passwords for each account!",
+                    "🛡️ Enable two-factor authentication whenever possible - it adds an extra layer of security!",
+                    "💪 Create passwords with at least 12 characters using uppercase, lowercase, numbers, and symbols!",
+                    "🚫 Never reuse passwords across different accounts!",
+                    "🎯 Avoid using personal information like birthdays or pet names in your passwords!"
+                }},
+                { "phishing", new List<string> {
+                    "🎣 Always check the sender's email address carefully - scammers use slight variations!",
+                    "⚠️ Hover over links before clicking to see the actual destination URL!",
+                    "📧 Legitimate companies never ask for passwords via email!",
+                    "🔍 Look for spelling errors and urgent language - common phishing tactics!",
+                    "📱 When in doubt, contact the company directly using their official website!"
+                }},
+                { "privacy", new List<string> {
+                    "🔒 Review app permissions regularly - remove access for apps you don't use!",
+                    "🌐 Use a VPN when on public Wi-Fi to encrypt your internet traffic!",
+                    "📱 Disable location tracking for apps that don't need it!",
+                    "🔍 Regularly check 'Have I Been Pwned' to see if your data was compromised!",
+                    "📧 Use aliases or temporary emails for newsletter signups!"
+                }},
+                { "browsing", new List<string> {
+                    "🌐 Look for the padlock icon in the address bar - it means the site uses HTTPS encryption!",
+                    "🧹 Clear your browser cache and cookies regularly!",
+                    "🔧 Keep your browser updated for the latest security patches!",
+                    "🚫 Avoid saving passwords in your browser - use a password manager instead!",
+                    "🛡️ Install reputable ad-blockers and script blockers!"
+                }},
+                { "malware", new List<string> {
+                    "💿 Always download software from official sources, not third-party sites!",
+                    "🔄 Keep your antivirus software updated and run regular scans!",
+                    "⚠️ Be cautious with email attachments - even from known senders!",
+                    "🔧 Enable automatic updates for your operating system!",
+                    "💾 Back up important data regularly to an external drive or cloud!"
+                }}
+            };
+
+            _generalTips = new List<string>
+            {
+                "💡 Keep your software updated - security patches fix known vulnerabilities!",
+                "💡 Use unique passwords for every account - credential stuffing attacks are common!",
+                "💡 Think before you click - social engineering is the #1 attack vector!",
+                "💡 Regular backups can save you from ransomware attacks!",
+                "💡 Be skeptical of unsolicited calls asking for personal information!",
+                "💡 Lock your computer when stepping away - even for a minute!",
+                "💡 Use secure Wi-Fi - public networks can be easily intercepted!",
+                "💡 Monitor your bank statements for unauthorized transactions!"
+            };
+
+            _sentimentKeywords = new Dictionary<string, string[]>
+            {
+                { "worried", new string[] { "worried", "concerned", "anxious", "nervous", "scared", "fear", "unsafe", "vulnerable" } },
+                { "frustrated", new string[] { "frustrated", "annoyed", "irritated", "fed up", "tired of", "sick of", "exhausted", "stressed" } },
+                { "curious", new string[] { "curious", "interested", "want to learn", "tell me", "explain", "how does", "what is", "why do" } },
+                { "confused", new string[] { "confused", "don't understand", "unclear", "what does it mean", "too complicated", "complex" } },
+                { "grateful", new string[] { "thank", "thanks", "appreciate", "helpful", "useful", "great info", "good to know", "awesome" } },
+                { "hopeless", new string[] { "hopeless", "no hope", "useless", "pointless", "why bother", "won't help", "never work", "impossible" } }
+            };
+
+            _empatheticResponses = new Dictionary<string, List<string>>
+            {
+                { "worried", new List<string> {
+                    "I completely understand your concern. Many people feel worried about cybersecurity - it's normal! Let me help you feel more secure.",
+                    "Your worry is valid. Online threats can be scary, but I'm here to help you stay safe. Here's something practical you can do:",
+                    "It's okay to feel worried. The good news is that there are simple steps you can take to protect yourself. Let me share one:",
+                    "Feeling concerned is the first step toward better security! Let me give you a tip that will help ease your mind."
+                }},
+                { "frustrated", new List<string> {
+                    "I hear your frustration! Cybersecurity can feel overwhelming at times. Let me simplify this for you:",
+                    "It's completely normal to feel frustrated. Let me break this down into something simple you can do right now:",
+                    "I understand this can be frustrating. Instead of trying to do everything, let's focus on one small, important step:",
+                    "Your frustration is understandable. Let me give you one simple tip that makes a big difference:"
+                }},
+                { "curious", new List<string> {
+                    "That's a great question! I'm glad you're curious about staying safe online. Here's what you should know:",
+                    "I love your curiosity! Learning about cybersecurity is the best way to stay protected. Let me explain:",
+                    "Great question! Being curious about security is how we all stay safer. Here's the answer:",
+                    "I'm happy you asked! Curiosity about cybersecurity is the first step to becoming more secure."
+                }},
+                { "confused", new List<string> {
+                    "I can see this is confusing. Let me explain it more simply:",
+                    "Don't worry - cybersecurity terms can be confusing. Let me put this in plain English:",
+                    "I understand this is complex. Let me break it down into simple steps:",
+                    "You're not alone in finding this confusing. Let me explain it differently:"
+                }},
+                { "grateful", new List<string> {
+                    "You're very welcome! I'm glad I could help. Staying safe online is important. Here's another tip you might like:",
+                    "Thank you! I'm happy to help. Since you found that useful, here's something else to keep in mind:",
+                    "My pleasure! Knowledge is power when it comes to security. Let me share another helpful tip:",
+                    "I appreciate your kind words! Here's another cybersecurity tip you might find valuable:"
+                }},
+                { "hopeless", new List<string> {
+                    "I hear that you're feeling hopeless. Please don't give up - even small steps make a big difference! Let's start with something simple:",
+                    "I understand it can feel hopeless when there's so much to worry about. But you don't have to do everything at once. Try this one thing:",
+                    "Don't lose hope! Every security expert started somewhere. Let's focus on one small, manageable step:",
+                    "I know cybersecurity can feel overwhelming, but you're already taking the right step by learning. Here's an easy win for you:"
+                }}
+            };
         }
 
         public void SetUserName(string name)
         {
             _userName = name;
             OnUserInfoUpdated?.Invoke($"👤 User: {name}");
+            _activityLog.AddEntry("User Logged In", name);
         }
 
         public void ProcessInput(string input)
@@ -175,46 +187,408 @@ namespace PROG6221_POE
             if (string.IsNullOrWhiteSpace(input)) return;
 
             _messageCount++;
-            string lowerInput = input.ToLower();
+            string lowerInput = input.ToLower().Trim();
 
-            // Question 4: Check for follow-up indicators
-            if (_awaitingFollowUp && IsFollowUpRequest(lowerInput))
-            {
-                HandleFollowUp();
-                return;
-            }
-
-            // Question 6: Detect sentiment FIRST (before keyword processing)
-            string sentiment = DetectSentiment(lowerInput);
-            if (sentiment != "neutral")
-            {
-                OnSentimentDetected?.Invoke(sentiment, GetSentimentEmoji(sentiment));
-
-                // Question 6: Provide empathetic response AND then give a tip
-                HandleSentimentWithTip(sentiment, lowerInput);
-                return;
-            }
-
-            // Question 7: Check for exit/quit
+            // Check for exit
             if (IsExitCommand(lowerInput))
             {
                 HandleExit();
                 return;
             }
 
-            // Check for menu request
-            if (lowerInput.Contains("menu") || lowerInput.Contains("help"))
+            // Check for menu
+            if (lowerInput.Contains("menu") || lowerInput.Contains("help") || lowerInput == "?")
             {
                 ShowMenu();
                 return;
             }
 
-            // Question 2: Process by keyword recognition
+            // Check for activity log request
+            if (lowerInput.Contains("log") || lowerInput.Contains("activity") || lowerInput.Contains("what have you done"))
+            {
+                ShowActivityLog();
+                return;
+            }
+
+            // Check for quiz request
+            if (lowerInput.Contains("quiz") || lowerInput.Contains("game") || lowerInput.Contains("test") || lowerInput.Contains("challenge"))
+            {
+                StartQuiz();
+                return;
+            }
+
+            // Check for task management commands
+            if (lowerInput.Contains("add task") || lowerInput.Contains("new task") || lowerInput.Contains("create task") ||
+                lowerInput.Contains("remind me") || lowerInput.Contains("set reminder"))
+            {
+                HandleTaskCommand(lowerInput);
+                return;
+            }
+
+            // Check for viewing tasks
+            if (lowerInput.Contains("show tasks") || lowerInput.Contains("list tasks") || lowerInput.Contains("view tasks") ||
+                lowerInput.Contains("my tasks") || lowerInput.Contains("what tasks"))
+            {
+                ShowTasks();
+                return;
+            }
+
+            // Check for quiz mode answers
+            if (_quizMode && IsQuizAnswer(lowerInput))
+            {
+                HandleQuizAnswer(lowerInput);
+                return;
+            }
+
+            // Check for task completion
+            if (lowerInput.Contains("complete task") || lowerInput.Contains("mark complete") || lowerInput.Contains("finish task"))
+            {
+                HandleTaskCompletion(lowerInput);
+                return;
+            }
+
+            // Check for task deletion
+            if (lowerInput.Contains("delete task") || lowerInput.Contains("remove task"))
+            {
+                HandleTaskDeletion(lowerInput);
+                return;
+            }
+
+            // Check for follow-up
+            if (_awaitingFollowUp && IsFollowUpRequest(lowerInput))
+            {
+                HandleFollowUp();
+                return;
+            }
+
+            // Sentiment detection
+            string sentiment = DetectSentiment(lowerInput);
+            if (sentiment != "neutral")
+            {
+                OnSentimentDetected?.Invoke(sentiment, GetSentimentEmoji(sentiment));
+                HandleSentimentWithTip(sentiment, lowerInput);
+                return;
+            }
+
+            // Process by keywords
             string response = ProcessByKeywords(lowerInput);
             OnResponseGenerated?.Invoke(response);
         }
 
-        #region Question 6: Enhanced Sentiment Detection Methods
+        #region Task Management
+
+        private void HandleTaskCommand(string input)
+        {
+            // Check if it's a reminder request
+            if (input.Contains("remind me") || input.Contains("set reminder"))
+            {
+                string title = ExtractTaskTitle(input);
+                if (!string.IsNullOrEmpty(title))
+                {
+                    _pendingTaskTitle = title;
+                    OnResponseGenerated?.Invoke($"📌 I'll set a reminder for '{title}'. What's the description? (or say 'skip' to skip)");
+                    _awaitingFollowUp = true;
+                    return;
+                }
+            }
+
+            // Check for add task
+            string taskTitle = ExtractTaskTitle(input);
+            if (!string.IsNullOrEmpty(taskTitle))
+            {
+                _pendingTaskTitle = taskTitle;
+                OnResponseGenerated?.Invoke($"📋 Task '{taskTitle}' added! Would you like to add a description? (or say 'skip' to skip)");
+                _awaitingFollowUp = true;
+                return;
+            }
+
+            OnResponseGenerated?.Invoke("I didn't catch that task. Try saying 'Add task: [your task name]'");
+        }
+
+        public void AddTaskWithDescription(string description)
+        {
+            if (string.IsNullOrEmpty(_pendingTaskTitle))
+            {
+                OnResponseGenerated?.Invoke("No pending task found. Please specify a task first.");
+                return;
+            }
+
+            if (description?.ToLower().Trim() == "skip")
+            {
+                _dbHelper.AddTask(_pendingTaskTitle, "", null);
+                _activityLog.AddEntry("Task Added", $"{_pendingTaskTitle} (no description)");
+                OnResponseGenerated?.Invoke($"✅ Task '{_pendingTaskTitle}' added successfully! Would you like to set a reminder? (yes/no)");
+                _pendingTaskTitle = null;
+                _awaitingFollowUp = true;
+                return;
+            }
+
+            _dbHelper.AddTask(_pendingTaskTitle, description, null);
+            _activityLog.AddEntry("Task Added", $"{_pendingTaskTitle}: {description}");
+            OnResponseGenerated?.Invoke($"✅ Task '{_pendingTaskTitle}' added with description! Would you like to set a reminder? (yes/no)");
+            _pendingTaskTitle = null;
+            _awaitingFollowUp = true;
+        }
+
+        public void SetTaskReminder(DateTime reminderDate)
+        {
+            if (_pendingTaskTitle != null)
+            {
+                _dbHelper.AddTask(_pendingTaskTitle, "", reminderDate);
+                _activityLog.AddEntry("Task Added with Reminder", $"{_pendingTaskTitle} - Reminder: {reminderDate:yyyy-MM-dd HH:mm}");
+                OnResponseGenerated?.Invoke($"✅ Task '{_pendingTaskTitle}' added with reminder for {reminderDate:yyyy-MM-dd HH:mm}!");
+                _pendingTaskTitle = null;
+            }
+            else
+            {
+                OnResponseGenerated?.Invoke("No pending task to add a reminder to. Please add a task first.");
+            }
+            _awaitingFollowUp = false;
+        }
+
+        private void ShowTasks()
+        {
+            var tasks = _dbHelper.GetTasks();
+            if (!tasks.Any())
+            {
+                OnResponseGenerated?.Invoke("📭 You have no pending tasks. Add a task to get started!");
+                return;
+            }
+
+            string taskList = "📋 **Your Tasks** 📋\n\n";
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                var task = tasks[i];
+                taskList += $"{i + 1}. {task.Status} **{task.Title}**\n";
+                if (!string.IsNullOrEmpty(task.Description))
+                    taskList += $"   📝 {task.Description}\n";
+                if (task.ReminderDate.HasValue)
+                    taskList += $"   ⏰ Reminder: {task.ReminderDate:yyyy-MM-dd HH:mm}\n";
+                taskList += "\n";
+            }
+            OnResponseGenerated?.Invoke(taskList);
+        }
+
+        private void HandleTaskCompletion(string input)
+        {
+            var match = Regex.Match(input, @"(\d+)");
+            if (match.Success && int.TryParse(match.Groups[1].Value, out int index))
+            {
+                var tasks = _dbHelper.GetTasks();
+                if (index > 0 && index <= tasks.Count)
+                {
+                    var task = tasks[index - 1];
+                    if (_dbHelper.MarkTaskComplete(task.Id))
+                    {
+                        _activityLog.AddEntry("Task Completed", task.Title);
+                        OnResponseGenerated?.Invoke($"✅ Task '{task.Title}' marked as complete! Great job!");
+                    }
+                    else
+                    {
+                        OnResponseGenerated?.Invoke("❌ Failed to complete task. Please try again.");
+                    }
+                    return;
+                }
+            }
+            OnResponseGenerated?.Invoke("Please specify which task to complete. Example: 'Complete task 1'");
+        }
+
+        private void HandleTaskDeletion(string input)
+        {
+            var match = Regex.Match(input, @"(\d+)");
+            if (match.Success && int.TryParse(match.Groups[1].Value, out int index))
+            {
+                var tasks = _dbHelper.GetTasks();
+                if (index > 0 && index <= tasks.Count)
+                {
+                    var task = tasks[index - 1];
+                    if (_dbHelper.DeleteTask(task.Id))
+                    {
+                        _activityLog.AddEntry("Task Deleted", task.Title);
+                        OnResponseGenerated?.Invoke($"🗑️ Task '{task.Title}' deleted successfully.");
+                    }
+                    else
+                    {
+                        OnResponseGenerated?.Invoke("❌ Failed to delete task. Please try again.");
+                    }
+                    return;
+                }
+            }
+            OnResponseGenerated?.Invoke("Please specify which task to delete. Example: 'Delete task 1'");
+        }
+
+        private string ExtractTaskTitle(string input)
+        {
+            // Remove common prefixes
+            string[] prefixes = { "add task", "new task", "create task", "remind me to", "set reminder for", "remind me about" };
+            string cleaned = input;
+            foreach (var prefix in prefixes)
+            {
+                if (cleaned.Contains(prefix))
+                {
+                    cleaned = cleaned.Replace(prefix, "").Trim();
+                    break;
+                }
+            }
+
+            // If it's a reminder, extract the action
+            if (cleaned.Contains("to "))
+                cleaned = cleaned.Substring(cleaned.IndexOf("to ") + 3).Trim();
+
+            if (cleaned.Contains("about "))
+                cleaned = cleaned.Substring(cleaned.IndexOf("about ") + 6).Trim();
+
+            // Remove date/time parts if present
+            cleaned = Regex.Replace(cleaned, @"(tomorrow|today|in \d+ days?|on \w+|\d{4}-\d{2}-\d{2})", "").Trim();
+
+            return string.IsNullOrEmpty(cleaned) ? null : cleaned;
+        }
+
+        #endregion
+
+        #region Quiz Management
+
+        private void StartQuiz()
+        {
+            _quizManager.ResetQuiz();
+            _quizMode = true;
+            _activityLog.AddEntry("Quiz Started", "Cybersecurity quiz initiated");
+            var question = _quizManager.GetNextQuestion();
+            if (question != null)
+            {
+                DisplayQuizQuestion(question);
+            }
+        }
+
+        private bool IsQuizAnswer(string input)
+        {
+            // Check for single letter answers or number answers
+            if (input.Length == 1 && char.IsLetterOrDigit(input[0]))
+                return true;
+            if (int.TryParse(input, out _))
+                return true;
+            return false;
+        }
+
+        private void HandleQuizAnswer(string input)
+        {
+            var question = _quizManager.GetNextQuestion();
+            if (question == null)
+            {
+                // If no question, the quiz must be complete
+                _quizMode = false;
+                return;
+            }
+
+            int selectedIndex;
+            if (int.TryParse(input, out int num) && num >= 1 && num <= question.Options.Count)
+            {
+                selectedIndex = num - 1;
+            }
+            else if (char.IsLetter(input[0]))
+            {
+                char answer = char.ToUpper(input[0]);
+                selectedIndex = answer - 'A';
+                if (selectedIndex < 0 || selectedIndex >= question.Options.Count)
+                {
+                    OnResponseGenerated?.Invoke("Invalid answer. Please select a valid option.");
+                    return;
+                }
+            }
+            else
+            {
+                OnResponseGenerated?.Invoke("Invalid answer. Please select a valid option.");
+                return;
+            }
+
+            _quizManager.SubmitAnswer(selectedIndex);
+        }
+
+        private void DisplayQuizQuestion(QuizQuestion question)
+        {
+            string display = $"📝 {question.Question}\n\n";
+            for (int i = 0; i < question.Options.Count; i++)
+            {
+                display += $"{(char)('A' + i)}) {question.Options[i]}\n";
+            }
+            OnResponseGenerated?.Invoke(display);
+        }
+
+        #endregion
+
+        #region Activity Log
+
+        private void ShowActivityLog()
+        {
+            string log = _activityLog.GetLogSummary(10);
+            OnResponseGenerated?.Invoke(log);
+        }
+
+        #endregion
+
+        #region NLP and Keyword Processing
+
+        private string ProcessByKeywords(string input)
+        {
+            // Check for NLP variations
+            string normalized = NormalizeInput(input);
+
+            foreach (var kvp in _keywordMap)
+            {
+                if (kvp.Value.Any(keyword => normalized.Contains(keyword)))
+                {
+                    _currentTopic = kvp.Key;
+                    _awaitingFollowUp = true;
+
+                    if (input.Contains("favorite") || input.Contains("love") || input.Contains("interested in"))
+                    {
+                        _favoriteTopic = kvp.Key;
+                        OnUserInfoUpdated?.Invoke($"⭐ Favorite topic: {kvp.Key.ToUpper()}");
+                        return PersonalizeResponse($"I see you're interested in {kvp.Key}! That's great! {GetRandomResponse(kvp.Key)}");
+                    }
+
+                    return GetRandomResponse(kvp.Key);
+                }
+            }
+
+            if (input.Contains("tip") || input.Contains("advice") || input.Contains("suggestion"))
+            {
+                return GetRandomGeneralTip();
+            }
+
+            return GetDefaultResponse();
+        }
+
+        private string NormalizeInput(string input)
+        {
+            // Basic NLP simulation - handle common variations
+            string normalized = input.ToLower();
+
+            // Handle "remind me" variations
+            normalized = normalized.Replace("remind me", "reminder");
+            normalized = normalized.Replace("set reminder", "reminder");
+            normalized = normalized.Replace("add reminder", "reminder");
+
+            // Handle task variations
+            normalized = normalized.Replace("add task", "task");
+            normalized = normalized.Replace("create task", "task");
+            normalized = normalized.Replace("new task", "task");
+
+            // Handle quiz variations
+            normalized = normalized.Replace("take quiz", "quiz");
+            normalized = normalized.Replace("start quiz", "quiz");
+            normalized = normalized.Replace("play game", "quiz");
+
+            // Handle activity log variations
+            normalized = normalized.Replace("what have you done", "log");
+            normalized = normalized.Replace("show activity", "log");
+
+            return normalized;
+        }
+
+        #endregion
+
+        #region Sentiment and Follow-up
 
         private string DetectSentiment(string input)
         {
@@ -247,20 +621,12 @@ namespace PROG6221_POE
 
         private void HandleSentimentWithTip(string sentiment, string userInput)
         {
-            // Get empathetic response
             string empatheticResponse = GetEmpatheticResponse(sentiment);
-
-            // Then provide a relevant tip based on what they might be asking about
             string tip = GetRelevantTip(userInput);
-
-            // Combine and send
             string fullResponse = $"{empatheticResponse}\n\n{tip}";
-
-            // Question 6 requirement: Share a tip immediately without making user ask again
-            // Also set follow-up so they can ask for more
             _awaitingFollowUp = true;
             _currentTopic = ExtractTopicFromInput(userInput);
-
+            _activityLog.AddEntry("Sentiment Detected", $"{sentiment}: {userInput.Substring(0, Math.Min(30, userInput.Length))}...");
             OnResponseGenerated?.Invoke(fullResponse);
         }
 
@@ -272,14 +638,11 @@ namespace PROG6221_POE
                 string response = _empatheticResponses[sentiment][rand.Next(_empatheticResponses[sentiment].Count)];
                 return PersonalizeResponse(response);
             }
-
-            // Default empathetic response
             return PersonalizeResponse("I understand how you feel. Let me help you with that!");
         }
 
         private string GetRelevantTip(string userInput)
         {
-            // Try to find a topic in their input
             foreach (var kvp in _keywordMap)
             {
                 if (kvp.Value.Any(keyword => userInput.Contains(keyword)))
@@ -287,8 +650,6 @@ namespace PROG6221_POE
                     return GetRandomResponse(kvp.Key);
                 }
             }
-
-            // Default to general tip
             return GetRandomGeneralTip();
         }
 
@@ -304,16 +665,9 @@ namespace PROG6221_POE
             return null;
         }
 
-        #endregion
-
-        #region Question 4: Conversation Flow Methods
         private bool IsFollowUpRequest(string input)
         {
-            string[] followupPhrases = {
-                "tell me more", "explain more", "more", "another",
-                "elaborate", "continue", "go on", "and then", "what else",
-                "more tips", "another tip", "more information", "next"
-            };
+            string[] followupPhrases = { "tell me more", "explain more", "more", "another", "elaborate", "continue", "go on", "and then", "what else", "more tips", "another tip" };
             return followupPhrases.Any(phrase => input.Contains(phrase));
         }
 
@@ -321,7 +675,6 @@ namespace PROG6221_POE
         {
             _awaitingFollowUp = false;
             string response;
-
             if (_currentTopic != null)
             {
                 response = GetRandomResponse(_currentTopic);
@@ -333,40 +686,11 @@ namespace PROG6221_POE
                 OnResponseGenerated?.Invoke(response);
             }
         }
+
         #endregion
 
-        #region Question 2: Keyword Recognition Logic
-        private string ProcessByKeywords(string input)
-        {
-            foreach (var kvp in _keywordMap)
-            {
-                if (kvp.Value.Any(keyword => input.Contains(keyword)))
-                {
-                    _currentTopic = kvp.Key;
-                    _awaitingFollowUp = true;
+        #region Helper Methods
 
-                    // Question 5: Update favorite topic
-                    if (input.Contains("favorite") || input.Contains("love") || input.Contains("interested in"))
-                    {
-                        _favoriteTopic = kvp.Key;
-                        OnUserInfoUpdated?.Invoke($"⭐ Favorite topic: {kvp.Key.ToUpper()}");
-                        return PersonalizeResponse($"I see you're interested in {kvp.Key}! That's great! {GetRandomResponse(kvp.Key)}");
-                    }
-
-                    return GetRandomResponse(kvp.Key);
-                }
-            }
-
-            if (input.Contains("tip") || input.Contains("advice") || input.Contains("suggestion"))
-            {
-                return GetRandomGeneralTip();
-            }
-
-            return GetDefaultResponse();
-        }
-        #endregion
-
-        #region Question 3: Random Response Methods
         private string GetRandomResponse(string topic)
         {
             Random rand = new Random();
@@ -387,19 +711,13 @@ namespace PROG6221_POE
 
         private string PersonalizeResponse(string response)
         {
-            if (!string.IsNullOrEmpty(_userName))
+            if (!string.IsNullOrEmpty(_userName) && new Random().Next(5) == 0)
             {
-                // Occasionally add user name for personalization (about 20% of responses)
-                if (new Random().Next(5) == 0)
-                {
-                    return $"{_userName}, {response.ToLower()}";
-                }
+                return $"{_userName}, {response.ToLower()}";
             }
             return response;
         }
-        #endregion
 
-        #region Question 7: Error Handling and Edge Cases
         private bool IsExitCommand(string input)
         {
             string[] exitCommands = { "exit", "quit", "bye", "goodbye", "end", "stop" };
@@ -408,19 +726,22 @@ namespace PROG6221_POE
 
         private void HandleExit()
         {
-            string exitMessage = $"Goodbye {_userName ?? "friend"}! Remember to stay safe online. " +
-                                $"Stay secure! 🔒";
+            string exitMessage = $"Goodbye {_userName ?? "friend"}! Remember to stay safe online. Stay secure! 🔒";
             OnResponseGenerated?.Invoke(exitMessage);
+            _activityLog.AddEntry("User Logged Out", _userName ?? "Unknown user");
         }
 
         private void ShowMenu()
         {
             string menu = "🔐 **SECURECORE MENU** 🔐\n\n" +
-                         "• Password Safety\n" +
-                         "• Phishing Attacks\n" +
-                         "• Privacy Protection\n" +
-                         "• Safe Browsing\n" +
-                         "• Malware Protection\n\n" +
+                         "• **Password Safety** - Learn about strong passwords\n" +
+                         "• **Phishing Attacks** - Identify scams and fraud\n" +
+                         "• **Privacy Protection** - Keep your data safe\n" +
+                         "• **Safe Browsing** - Browse the web securely\n" +
+                         "• **Malware Protection** - Defend against viruses\n" +
+                         "• **Task Management** - Add, view, complete tasks\n" +
+                         "• **Quiz** - Test your cybersecurity knowledge\n" +
+                         "• **Activity Log** - See what I've done\n\n" +
                          "Just type any topic above, or ask for 'more tips'!";
             OnResponseGenerated?.Invoke(menu);
         }
@@ -428,7 +749,7 @@ namespace PROG6221_POE
         private string GetDefaultResponse()
         {
             string[] defaultResponses = {
-                "I'm not sure I understand. Try 'password', 'phishing', 'privacy', 'browsing', 'malware', or 'menu'.",
+                "I'm not sure I understand. Try 'password', 'phishing', 'privacy', 'browsing', 'malware', 'task', 'quiz', or 'menu'.",
                 $"Ask me about cybersecurity topics like passwords or phishing, {_userName ?? "friend"}!",
                 "I specialize in cybersecurity! Try asking about 'password safety' or 'phishing attacks'.",
                 "Type 'menu' to see all the topics I can help you with!"
@@ -436,11 +757,12 @@ namespace PROG6221_POE
             Random rand = new Random();
             return PersonalizeResponse(defaultResponses[rand.Next(defaultResponses.Length)]);
         }
-        #endregion
 
         public void Dispose()
         {
-            // Cleanup if needed
+            _dbHelper?.Dispose();
         }
+
+        #endregion
     }
 }
