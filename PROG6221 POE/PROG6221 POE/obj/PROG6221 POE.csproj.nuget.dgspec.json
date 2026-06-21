@@ -52,6 +52,10 @@
           "framework": "net10.0-windows7.0",
           "targetAlias": "net10.0-windows",
           "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[9.7.0, )"

@@ -2,12 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="SecureCore - Cybersecurity Chatbot" 
-        Height="700" Width="1000"
+        Height="750" Width="1000"
         WindowStartupLocation="CenterScreen"
         Background="#1E1E2E">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -27,13 +28,35 @@
             </StackPanel>
         </Border>
 
+        <!-- Navigation Toolbar -->
+        <Border Grid.Row="1" Background="#2D2D3D" Padding="10" Margin="10,10,10,5" CornerRadius="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Manage Tasks" Background="#00CED1" 
+                        Foreground="#1A1A2E" FontWeight="Bold" Padding="15,8" Margin="5"
+                        BorderThickness="0" Cursor="Hand" Click="BtnOpenTasks_Click"/>
+
+                <Button Content="Start Quiz" Background="#FFA500" 
+                        Foreground="#1A1A2E" FontWeight="Bold" Padding="15,8" Margin="5"
+                        BorderThickness="0" Cursor="Hand" Click="BtnOpenQuiz_Click"/>
+
+                <Button Content="View Activity Log" Background="#4A4A5A" 
+                        Foreground="White" FontWeight="Bold" Padding="15,8" Margin="5"
+                        BorderThickness="0" Cursor="Hand" Click="BtnOpenLog_Click"/>
+
+                <Button Content="Settings" Background="#6C5CE7" 
+                        Foreground="White" FontWeight="Bold" Padding="15,8" Margin="5"
+                        BorderThickness="0" Cursor="Hand" Click="BtnOpenSettings_Click"/>
+            </StackPanel>
+        </Border>
+
         <!-- Name Input -->
-        <Border Grid.Row="1" Background="#2D2D3D" Padding="15" Margin="10,10,10,0" CornerRadius="10">
+        <Border Grid.Row="2" Background="#2D2D3D" Padding="15" Margin="10,5,10,5" CornerRadius="10">
             <StackPanel>
                 <TextBlock Text="Enter your name:" Foreground="White" FontSize="14"/>
                 <Grid Margin="0,8,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="txtUserName" Grid.Column="0" Background="#4A4A5A" Foreground="White"
@@ -41,13 +64,16 @@
                     <Button x:Name="btnStartChat" Grid.Column="1" Content="Start Chat" Background="#00CED1"
                             Foreground="#1A1A2E" FontWeight="Bold" Padding="20,10" Margin="10,0,0,0"
                             BorderThickness="0" Cursor="Hand" Click="BtnStartChat_Click"/>
+                    <Button x:Name="btnClearChat" Grid.Column="2" Content="Clear Chat" Background="#FF6B6B"
+                            Foreground="White" FontWeight="Bold" Padding="20,10" Margin="10,0,0,0"
+                            BorderThickness="0" Cursor="Hand" IsEnabled="False" Click="BtnClearChat_Click"/>
                 </Grid>
             </StackPanel>
         </Border>
 
         <!-- Chat Display -->
-        <ListBox x:Name="lstChatDisplay" Grid.Row="2" Background="#252535" BorderThickness="0"
-                 Margin="10,10,10,5" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox x:Name="lstChatDisplay" Grid.Row="3" Background="#252535" BorderThickness="0"
+                 Margin="10,5,10,5" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="10" Padding="12,8" Margin="5,3"
@@ -65,15 +91,16 @@
         </ListBox>
 
         <!-- Status Bar -->
-        <Border Grid.Row="3" Background="#2D2D3D" Padding="10" Margin="10,0,10,5" CornerRadius="8" Height="40">
+        <Border Grid.Row="4" Background="#2D2D3D" Padding="10" Margin="10,5,10,5" CornerRadius="8" Height="40">
             <WrapPanel>
                 <TextBlock x:Name="txtSentiment" Text="😊 Sentiment: Neutral" Foreground="#AAA" FontSize="11" VerticalAlignment="Center"/>
                 <TextBlock x:Name="txtUserInfo" Text="" Foreground="#00CED1" FontSize="11" Margin="20,0,0,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="txtMessageCount" Text="" Foreground="#888" FontSize="11" Margin="20,0,0,0" VerticalAlignment="Center"/>
             </WrapPanel>
         </Border>
 
         <!-- Message Input -->
-        <Border Grid.Row="4" Background="#2D2D3D" Padding="15" Margin="10,0,10,10" CornerRadius="10">
+        <Border Grid.Row="5" Background="#2D2D3D" Padding="15" Margin="10,5,10,10" CornerRadius="10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
